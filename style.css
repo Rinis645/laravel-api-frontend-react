@@ -60,10 +60,98 @@ body::before {
     transition: background .2s ease, transform .2s ease;
 }
 
+#loadPostsXHR {
+    min-height: 44px;
+    margin: 24px 0 8px 10px;
+    padding: 0 18px;
+    border: 1px solid var(--ink);
+    background: transparent;
+    color: var(--ink);
+    font-size: 12px;
+    font-weight: 600;
+    transition: background .2s ease, transform .2s ease;
+}
+
 #loadPosts::after { margin-left: 18px; color: var(--green); content: '\2197'; font-size: 15px; }
-#loadPosts:hover { transform: translateY(-1px); background: #284239; }
-#loadPosts:disabled { cursor: wait; opacity: .65; }
+#loadPosts:hover, #loadPostsXHR:hover { transform: translateY(-1px); }
+#loadPosts:hover { background: #284239; }
+#loadPostsXHR:hover { background: #e8ece7; }
+#loadPosts:disabled, #loadPostsXHR:disabled { cursor: wait; opacity: .65; }
 #loadPosts:disabled::after { content: ''; }
+
+.account-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 22px;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.login-form, .post-form {
+    display: grid;
+    gap: 15px;
+    margin: 22px 0;
+    padding: 20px 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+}
+
+.login-form { grid-template-columns: repeat(2, minmax(0, 1fr)) auto; align-items: end; }
+.login-form.register-form { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.auth-mode-button { justify-self: start; }
+.login-form h2, .post-form h2 { grid-column: 1 / -1; margin: 0; font-family: var(--serif); font-size: 22px; font-weight: 400; }
+
+.login-form label, .post-form label {
+    display: grid;
+    gap: 6px;
+    color: #69776f;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.login-form input, .post-form input, .post-form textarea {
+    width: 100%;
+    min-height: 42px;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    border-radius: 0;
+    background: #fff;
+    color: var(--ink);
+    font: inherit;
+    font-size: 14px;
+}
+
+.post-form textarea { resize: vertical; }
+.post-toolbar { margin: 22px 0 8px; }
+.form-actions, .post-actions { display: flex; align-items: center; gap: 10px; }
+.form-actions { grid-column: 1 / -1; }
+.post-actions { margin-top: 16px; }
+
+.primary-button, .secondary-button, .danger-button, .text-button {
+    min-height: 40px;
+    padding: 0 14px;
+    border: 1px solid var(--ink);
+    font: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    transition: background .2s ease, transform .2s ease;
+}
+
+.primary-button { background: var(--ink); color: #fff; }
+.secondary-button { background: transparent; color: var(--ink); }
+.danger-button { border-color: #9b4a34; background: transparent; color: #9b4a34; }
+.text-button { border-color: transparent; background: transparent; color: var(--ink); }
+.primary-button:hover, .secondary-button:hover, .danger-button:hover, .text-button:hover { transform: translateY(-1px); }
+.primary-button:hover { background: #284239; }
+.secondary-button:hover, .text-button:hover { background: #e8ece7; }
+.danger-button:hover { background: #f4e5df; }
+.primary-button:disabled, .secondary-button:disabled, .danger-button:disabled { cursor: wait; opacity: .65; }
+
+.loading-indicator { display: flex; align-items: center; gap: 10px; margin: 12px 0; color: #69776f; font-size: 12px; }
+.loading-indicator[hidden] { display: none; }
+.loading-spinner { width: 18px; height: 18px; border: 2px solid var(--line); border-top-color: #618436; border-radius: 50%; animation: posts-spinner-spin .75s linear infinite; }
 
 #posts { margin-top: 22px; }
 
@@ -117,9 +205,15 @@ body::before {
     to { opacity: 1; transform: translateY(0); }
 }
 
+@keyframes posts-spinner-spin { to { transform: rotate(360deg); } }
+
 @media (max-width: 650px) {
     body { width: calc(100% - 40px); padding-top: 42px; }
     h1 { padding-bottom: 21px; font-size: 58px; }
+    #loadPostsXHR { display: block; margin: 10px 0 8px; }
+    .login-form { grid-template-columns: 1fr; }
+    .login-form h2, .form-actions { grid-column: auto; }
+    .account-bar { align-items: flex-start; }
     .post-card { padding: 21px 4px 23px 22px; }
     .post-card h2 { font-size: 21px; }
 }
