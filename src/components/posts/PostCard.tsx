@@ -1,6 +1,14 @@
-import React from 'react';
+import type { Post } from '../../types';
 
-export default function PostCard({ post, canManage, isDeleting, onEdit, onDelete }) {
+interface PostCardProps {
+    post: Post;
+    canManage: boolean;
+    isDeleting: boolean;
+    onEdit: () => void;
+    onDelete: () => void;
+}
+
+export default function PostCard({ post, canManage, isDeleting, onEdit, onDelete }: PostCardProps) {
     return (
         <article className="post-card">
             <h2>{post.title || 'Untitled post'}</h2>

@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import AccountBar from './components/auth/AccountBar.jsx';
-import AuthForm from './components/auth/AuthForm.jsx';
-import PostForm from './components/posts/PostForm.jsx';
-import PostList from './components/posts/PostList.jsx';
-import PostToolbar from './components/posts/PostToolbar.jsx';
-import PostsLoader from './components/posts/PostsLoader.jsx';
-import useAuth from './hooks/useAuth.js';
-import usePosts from './hooks/usePosts.js';
+import { useState } from 'react';
+import AccountBar from './components/auth/AccountBar';
+import AuthForm from './components/auth/AuthForm';
+import PostForm from './components/posts/PostForm';
+import PostList from './components/posts/PostList';
+import PostToolbar from './components/posts/PostToolbar';
+import PostsLoader from './components/posts/PostsLoader';
+import useAuth from './hooks/useAuth';
+import usePosts from './hooks/usePosts';
 
 export default function App() {
     const [error, setError] = useState('');

@@ -1,6 +1,23 @@
-import React from 'react';
+import type { FormEvent } from 'react';
+import type { Post, PostDraft } from '../../types';
 
-export default function PostForm({ draft, editingPost, isSaving, onDraftChange, onSubmit, onCancel }) {
+interface PostFormProps {
+    draft: PostDraft;
+    editingPost: Post | null;
+    isSaving: boolean;
+    onDraftChange: (draft: PostDraft) => void;
+    onSubmit: (event: FormEvent<HTMLFormElement>) => void;
+    onCancel: () => void;
+}
+
+export default function PostForm({
+    draft,
+    editingPost,
+    isSaving,
+    onDraftChange,
+    onSubmit,
+    onCancel
+}: PostFormProps) {
     return (
         <form className="post-form" onSubmit={onSubmit}>
             <h2>{editingPost ? 'Edit post' : 'New post'}</h2>
@@ -8,7 +25,7 @@ export default function PostForm({ draft, editingPost, isSaving, onDraftChange, 
                 Title
                 <input
                     type="text"
-                    maxLength="255"
+                    maxLength={255}
                     value={draft.title}
                     onChange={event => onDraftChange({ ...draft, title: event.target.value })}
                     required
@@ -17,7 +34,7 @@ export default function PostForm({ draft, editingPost, isSaving, onDraftChange, 
             <label>
                 Body
                 <textarea
-                    rows="5"
+                    rows={5}
                     value={draft.body}
                     onChange={event => onDraftChange({ ...draft, body: event.target.value })}
                     required

@@ -1,4 +1,18 @@
-import React from 'react';
+import type { ChangeEvent, FormEvent } from 'react';
+import type { AuthMode } from '../../types';
+
+interface AuthFormProps {
+    authMode: AuthMode;
+    name: string;
+    email: string;
+    password: string;
+    isLoggingIn: boolean;
+    onAuthenticate: (event: FormEvent<HTMLFormElement>) => void;
+    onNameChange: (event: ChangeEvent<HTMLInputElement>) => void;
+    onEmailChange: (event: ChangeEvent<HTMLInputElement>) => void;
+    onPasswordChange: (event: ChangeEvent<HTMLInputElement>) => void;
+    onAuthModeChange: () => void;
+}
 
 export default function AuthForm({
     authMode,
@@ -11,7 +25,7 @@ export default function AuthForm({
     onEmailChange,
     onPasswordChange,
     onAuthModeChange
-}) {
+}: AuthFormProps) {
     const isRegistration = authMode === 'register';
 
     return (

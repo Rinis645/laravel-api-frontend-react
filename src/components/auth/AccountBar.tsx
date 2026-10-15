@@ -1,6 +1,11 @@
-import React from 'react';
+import type { User } from '../../types';
 
-export default function AccountBar({ user, onSignOut }) {
+interface AccountBarProps {
+    user: User;
+    onSignOut: () => void;
+}
+
+export default function AccountBar({ user, onSignOut }: AccountBarProps) {
     return (
         <div className="account-bar">
             <span>Signed in as {user.email}</span>
