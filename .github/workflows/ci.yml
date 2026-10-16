@@ -1,0 +1,37 @@
+name: Koda pārbaudes
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lint-build-test:
+    name: Lint, build un testēšana
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Iegūt repozitorija kodu
+        uses: actions/checkout@v4
+
+      - name: Iestatīt Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Instalēt atkarības
+        run: npm ci
+
+      - name: Pārbaudīt kodu ar linteri
+        run: npm run lint
+
+      - name: Palaist automatizētos testus
+        run: npm test
+
+      - name: Izveidot būvējumu
+        run: npm run build
